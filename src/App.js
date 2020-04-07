@@ -1,25 +1,71 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import KernelNavigation from './components/navigation/KernelNavigation';
+
 function App() {
+
+  const menu = [
+    {
+      'id': 'applications',
+      'title': 'Applications',
+      'type': 'group', // group, collapse, link
+      'icon': 'apps',
+      'url': '/apps/calendar', //optional
+      'children': [
+        {
+          'id': 'calendar',
+          'title': 'Calendar',
+          'type': 'item',
+          'icon': 'today',
+          'url': '/apps/calendar'
+        },
+        {
+          'id': 'divider1',
+          'title': 'xxxx',
+          'type': 'divider'
+        },
+        {
+          'id': 'project',
+          'title': 'Project',
+          'type': 'item',
+          'url': '/apps/dashboards/project'
+        }
+      ]
+    },
+
+    {
+      'id': 'cadastro',
+      'title': 'Principal',
+      'type': 'group',
+      'icon': 'apps',
+      'children': [
+        {
+          'id': 'empresa',
+          'title': 'Empresa',
+          'type': 'item',
+          'icon': 'today',
+          'url': '/app/empresa'
+        },
+        {
+          'id': 'rep',
+          'title': 'REP',
+          'type': 'item',
+          'url': '/app/rep'
+        },
+        {
+          'id': 'empregado',
+          'title': 'Empregado',
+          'type': 'item',
+          'url': '/app/empregado'
+        }
+      ]
+    },
+
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <KernelNavigation navigation={menu} />
   );
 }
 
