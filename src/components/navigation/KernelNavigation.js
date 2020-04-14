@@ -116,6 +116,7 @@ function KernelNavigation(props) {
             >
                 <MenuIcon />
             </IconButton>
+{/*     
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -147,6 +148,7 @@ function KernelNavigation(props) {
                     }
                 })}
             </Drawer>
+*/}            
         </React.Fragment>
     )
 

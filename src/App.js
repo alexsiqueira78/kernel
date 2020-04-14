@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import KernelNavigation from './components/navigation/KernelNavigation';
+import KernelLayout from './components/layout/KernelLayout';
 
 function App() {
 
@@ -65,7 +66,8 @@ function App() {
   ];
 
   return (
-    <KernelNavigation navigation={menu} />
+//    <KernelNavigation navigation={menu} />
+    <KernelLayout></KernelLayout>
   );
 }
 

@@ -1,6 +1,7 @@
 import api from "./api";
 
-export const getAll = async () => {
+/*
+export const load = async () => {
     return await api.post("/systemuser/consultatodos")
         .then( (response) => {
             return response.data
@@ -8,6 +9,12 @@ export const getAll = async () => {
         .catch( (error) => {
             return error;
         });
+};
+*/
+export const load = async () => {
+    return [
+        { name: 'Alex', login: 'alexsiqueira.sp', email: 'alexsiqueira.sp@gmail.com'}
+      ];
 };
 
 

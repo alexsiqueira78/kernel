@@ -7,6 +7,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+document.getElementById('root').classList.add("flex")
 
 ReactDOM.render(
   <React.StrictMode>
