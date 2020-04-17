@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from "react-dom";
-import clsx from 'clsx';
+//import ReactDOM from "react-dom";
+//import clsx from 'clsx';
 
 import { layoutStyles } from './styles';
 import KernelUsuarioCrud from '../crud/KernelUsuarioCrud';
@@ -9,7 +9,7 @@ import KernelUsuarioCrud from '../crud/KernelUsuarioCrud';
 
 const KernelMain = () => {
 
-    const classes = layoutStyles();
+    //const classes = layoutStyles();
 
     return (
         <div id="kernel-main">

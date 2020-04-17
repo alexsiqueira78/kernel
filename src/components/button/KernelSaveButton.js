@@ -11,7 +11,7 @@ const KernelSaveButton = (props) => {
 
   return (
       <Button onClick={props.onClick}>
-        <CancelIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
+        <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
         Salvar
       </Button>
 

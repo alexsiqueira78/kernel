@@ -10,9 +10,9 @@ import * as serviceWorker from './serviceWorker';
 document.getElementById('root').classList.add("flex")
 
 ReactDOM.render(
-  <React.StrictMode>
+
     <App />
-  </React.StrictMode>,
+    ,
   document.getElementById('root')
 );
 

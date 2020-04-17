@@ -2,8 +2,11 @@ import React from 'react';
 
 import { layoutStyles } from './styles';
 import KernelTable from '../table/KernelTable';
+import BaseForm from './../form/BaseForm';
 
 const KernelCrud = (props) => {
+
+   
 
     const classes = layoutStyles();
 
@@ -49,6 +52,8 @@ const KernelCrud = (props) => {
         setState({ ...state, open: false });
     }
 
+ 
+
     return (
         <React.Fragment>
             {state.loading && 'Loading...'}
@@ -60,6 +65,14 @@ const KernelCrud = (props) => {
                 doAdd={handleAdd}
                 doEdit={handleEdit}
                 doDelete={handleDelete} />
+            <BaseForm
+                open={state.open}
+                editing={state.editing}
+                data={state.selected}
+                onClose={handleClose}
+                onSave={handleSave}
+                onCancel={handleClose}
+                title={props.title} />
         </React.Fragment>
     );
 

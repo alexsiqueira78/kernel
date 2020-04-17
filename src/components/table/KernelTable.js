@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import MaterialTable from "material-table";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,12 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { tableIcons } from '../../assets/tableIcons';
-import { layoutStyles } from './styles';
 
 
 const KernelTable = (props) => {
-
-    const classes = layoutStyles();
 
     const [state, setState] = React.useState({
         open: false,
