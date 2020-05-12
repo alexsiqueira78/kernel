@@ -20,6 +20,7 @@ const KernelTable = (props) => {
         errormessage: "",
       });
 
+/*      
     const loadData = () => {
         props.doLoad()
             .then(data => setState({ ...state, "loading": false, "data": data}))
@@ -28,6 +29,7 @@ const KernelTable = (props) => {
     }
 
     useEffect(() => loadData(), []);
+*/
 
     const handleAsking = (event, rowData) => {
         console.log("handleAsking");
@@ -39,8 +41,8 @@ const KernelTable = (props) => {
         setState({ ...state, "open": false });
     }
     
-    const handleSave = () => {
-        console.log("handleSave");
+    const handleConfirm = () => {
+        console.log("handleConfirm");
         setState({ ...state, "open": false });
         props.doDelete(state.rowData); 
     }
@@ -51,7 +53,8 @@ const KernelTable = (props) => {
                 icons={tableIcons}
                 title={props.title}
                 columns={props.columns}
-                data={state.data} 
+//                data={state.data} 
+                data={props.data} 
                 actions={[
                     {
                         icon: tableIcons.Add,
@@ -67,7 +70,7 @@ const KernelTable = (props) => {
                     rowData => ({
                         icon: tableIcons.Delete,
                         tooltip: 'Excluir Registro',
-                        onClick: { handleAsking },
+                        onClick: (event, rowData) => handleAsking(event, rowData),
                         disabled: rowData.delete === false
                     })
                 ]}
@@ -89,7 +92,7 @@ const KernelTable = (props) => {
                     <Button onClick={handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={handleSave} color="primary" autoFocus>
+                    <Button onClick={handleConfirm} color="primary" autoFocus>
                         OK
                     </Button>
                 </DialogActions>

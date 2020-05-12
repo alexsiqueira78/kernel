@@ -2,12 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const layoutStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden',
-    position: 'relative',
-    margin: '0',
-  },  
+    display: 'flex',
+  },
   flex: {
     display: 'flex',
   },

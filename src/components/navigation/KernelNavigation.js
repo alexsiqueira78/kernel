@@ -7,6 +7,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Drawer from '@material-ui/core/Drawer';
+import Typography from '@material-ui/core/Typography';
+
+
 import KernelNavigationGroup from './KernelNavigationGroup';
 import KernelNavigationItem from './KernelNavigationItem';
 
@@ -14,7 +18,7 @@ import KernelNavigationItem from './KernelNavigationItem';
 import { useStyles } from './styles';
 import './style.css';
 import { logout } from '../../services/auth';
-import Drawer from '@material-ui/core/Drawer';
+
 
 
 function KernelNavigation(props) {
@@ -37,16 +41,16 @@ function KernelNavigation(props) {
         setMenu(menu);
     }
 
-/*    
-    const handleChangeMenuNone = () => {
-        setMenu("NONE");
-    }
-
-
-    const handleChange = event => {
-        setMenu(menu);
-    }
-*/
+    /*    
+        const handleChangeMenuNone = () => {
+            setMenu("NONE");
+        }
+    
+    
+        const handleChange = event => {
+            setMenu(menu);
+        }
+    */
 
 
 
@@ -75,7 +79,7 @@ function KernelNavigation(props) {
 
 
     function createMenu(item) {
-        return item.type === 'divider' ? <Divider key={"divider" + item.id} /> : <KernelNavigationItem  key={"kernelNavigationItem" + item.id} id={item.id} title={item.title} onClickMenu={() => handleChangeMenu("mnUSUARIO")} />
+        return item.type === 'divider' ? <Divider key={"divider" + item.id} /> : <KernelNavigationItem key={"kernelNavigationItem" + item.id} id={item.id} title={item.title} onClickMenu={() => handleChangeMenu("mnUSUARIO")} />
     }
 
 
@@ -89,6 +93,7 @@ function KernelNavigation(props) {
 
     return (
         <React.Fragment>
+
             <IconButton
                 color="inherit"
                 aria-label="Open drawer"
@@ -97,7 +102,7 @@ function KernelNavigation(props) {
                 className={clsx(classes.menuButton, open && classes.hide)}
             >
                 <MenuIcon />
-            </IconButton> 
+            </IconButton>
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -108,7 +113,7 @@ function KernelNavigation(props) {
                 }}
             >
                 <div className={classes.drawerHeader}> v. 1.0.4.0
-                            <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
@@ -128,7 +133,15 @@ function KernelNavigation(props) {
                         return createMenu(item)
                     }
                 })}
-            </Drawer>          
+            </Drawer>
+            <main
+                className={clsx(classes.content, {
+                    [classes.contentShift]: open,
+                })}
+            >
+                <div className={classes.drawerHeader} />
+                {props.children}
+            </main>
         </React.Fragment>
     )
 

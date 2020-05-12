@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { layoutStyles } from './styles';
 import KernelTable from '../table/KernelTable';
 import BaseForm from './../form/BaseForm';
 
 const KernelCrud = (props) => {
-
-   
-
-    const classes = layoutStyles();
 
     const [state, setState] = React.useState({
         loading: false,
@@ -16,7 +11,8 @@ const KernelCrud = (props) => {
         editing: false,
         isvalid: false,
         errormessage: "Usuário do Sistema Inválido!",
-        selected: {}
+        selected: {},
+        data: []
     });
 
     const handleAdd = () => {
@@ -30,35 +26,48 @@ const KernelCrud = (props) => {
     }
 
     const handleSave = (entity) => {
-        console.log("handleSave");
-        setState({ ...state, open: true });
-        /*        
-                props.doSave(entity)
-                    .then(data => this.loadData())
-                    .catch((error) => this.setState({ "isvalid": false, "errorMessage": error }))
-        */
+        console.log("handleSave2->" + entity);
+        console.log(entity);
+        setState({ ...state, open: false });
+        props.doSave(entity)
+            .then(loadData())
+            .catch((error) => this.setState({ "isvalid": false, "errorMessage": error }));
     }
 
     const handleDelete = (rowData) => {
         console.log("handleDelete");
-        /*        
-                props.doRemove(rowData.id)
-                    .then(data => this.loadData())
-                    .catch((error) => this.setState({ "isvalid": false, "errorMessage": error }))
-        */
+      
+        props.doRemove(rowData.codigo)
+            .then(loadData())
+            .catch((error) => this.setState({ "isvalid": false, "errorMessage": error }));
+
     }
 
     const handleClose = () => {
         setState({ ...state, open: false });
     }
 
- 
+
+
+
+
+    
+    const loadData = () => {
+        props.doLoad()
+            .then(data => setState({ ...state, "loading": false, "data": data, open: false }))
+            .catch((error) => setState({ ...state, "isvalid": false, "errormessage": error }))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+
+    useEffect(() => loadData(), []);
+
 
     return (
         <React.Fragment>
             {state.loading && 'Loading...'}
             <KernelTable
-                data={props.doLoad}
+//                data={props.doLoad}
+                data={state.data}
                 columns={props.columns}
                 title={props.title}
                 doLoad={props.doLoad}
@@ -67,12 +76,13 @@ const KernelCrud = (props) => {
                 doDelete={handleDelete} />
             <BaseForm
                 open={state.open}
+                columns={props.columns}
                 editing={state.editing}
                 data={state.selected}
                 onClose={handleClose}
                 onSave={handleSave}
                 onCancel={handleClose}
-                title={props.title} />
+                title={props.title}>  {props.children} </BaseForm>
         </React.Fragment>
     );
 

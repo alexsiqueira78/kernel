@@ -1,59 +1,65 @@
 import api from "./api";
 
-/*
+
 export const load = async () => {
-    return await api.post("/systemuser/consultatodos")
-        .then( (response) => {
+    return await api.get("/usuario/listar")
+        .then((response) => {
             return response.data
         })
-        .catch( (error) => {
+        .catch((error) => {
             return error;
         });
 };
-*/
-export const load = async () => {
-    return [
-        { name: 'Alex', login: 'alexsiqueira.sp', email: 'alexsiqueira.sp@gmail.com'}
-      ];
-};
 
-
-export const save = async ( systemuser ) => {
-    let name = systemuser.name;
-    let login = systemuser.login;
-    let password = systemuser.password;
-    let email = systemuser.email;
-    return await api.post("/systemuser/cadastro", { name, login, password, email })
-        .then( (response) => {
+export const save = async (usuario) => {
+    const requestConfig = {
+        method: "post",
+        url: "/usuario/cadastrar",
+        data : {
+            nome: usuario.nome,
+            login: usuario.login,
+            password: usuario.password,
+        }
+    }
+    if (usuario.codigo) {
+        requestConfig.method = "put"
+        requestConfig.url = `/usuario/manter/${usuario.codigo}`
+    }
+    return await api(requestConfig)
+        .then((response) => {
             return response.data
         })
-        .catch( (error) => {
+        .catch((error) => {
             return error;
-        });  
+        });
+}
+
+export const remove = async (id) => {
+
+
+
+    return await api.delete(`/usuario/remover/${id}`)
+        .then((response) => {
+            return response.data
+        })
+        .catch((error) => {
+            return error;
+        });
 }
 
 
-export const changePassword = async ( systemuser ) => {
+export const changePassword = async (systemuser) => {
     let login = systemuser.login;
     let oldPassword = systemuser.oldpassword;
     let newPassword = systemuser.newpassword;
     let confirmationPassword = systemuser.confirmationpassword;
     return await api.post("/systemuser/changepassword", { login, oldPassword, newPassword, confirmationPassword })
-        .then( (response) => {
+        .then((response) => {
             return response.data
         })
-        .catch( (error) => {
+        .catch((error) => {
             throw new Error(error.response.data);
-        });  
-}
-
-
-export const remove = async ( id ) => {
-    return await api.post("/systemuser/excluir", { id })
-        .then( (response) => {
-            return response.data
-        })
-        .catch( (error) => {
-            return error;
         });
 }
+
+

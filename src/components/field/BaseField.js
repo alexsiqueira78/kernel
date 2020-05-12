@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import TextField from '@material-ui/core/TextField';
 
 const BaseField = (props) => {
@@ -9,6 +9,17 @@ const BaseField = (props) => {
         data: ( props.value != null ? props.value : ''),
         isvalid: ( props.value != null ? props.validate(props.value) : false)
     });
+
+    //useEffect(() => props.onChange({id}, values.data), []);
+
+    //useEffect(() => {
+    //    //console.log("useEffect-> " + props.id + ":" + values.data)
+    //    props.onChange(props.id, values.data)
+    //}, []);
+
+
+
+
 
     const handleChange = event => {    
         const name = event.target.id;

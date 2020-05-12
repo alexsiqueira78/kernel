@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,22 +10,48 @@ import NomeField from './../field/NomeField';
 
 const BaseForm = (props) => {
 
-    const [state, setState] = React.useState({
-        data: []
-    });
+    const [data, setData] = React.useState(
+        { dados: props.data }
+    );
 
     const handleSave = () => {
-        props.onSave(state.data);
+        console.log("handleSave1->" + data)
+        props.onSave(data);
     };
 
     const handleEntered = () => {
         console.log(handleEntered);
+        children.map(item => {
+           // handleChange([item.props.id], item.props.value);
+            data[item.props.id] = item.props.value;
+        })
     }
 
     const handleChange = (name, value) => {
-        console.log(name + ":" + value);
-        //setValues({ ...values, [name]: value});
+        console.log("handleChange1-> " + name + ":" + value)
+        setData({ ...data, [name]: value });
+        console.log("handleChange1-> " + data)
     };
+
+    const children = React.Children.map(props.children, function (child) {
+        if (React.isValidElement(child)) {
+            const propsAnother = {
+                onChange: handleChange
+            }
+            if (props.data[child.props.id]) {
+                propsAnother.value = props.data[child.props.id];
+            }
+            //handleChange(data[child.props.id],propsAnother.value)
+            //data[child.props.id] = propsAnother.value;
+            const element = React.cloneElement(child, { ...propsAnother })
+            return element
+        }
+    });
+
+
+
+    // console.log(props.data);
+
 
     /*    
       const [values, setValues] = React.useState({
@@ -59,8 +85,7 @@ const BaseForm = (props) => {
                 aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
                 <DialogContent>
-                    <NomeField id="name" label="Nome" placeholder="Nome do Usuário" helperText="Somente letras" required={true} disabled={false} value={props.data.name} onChange={handleChange}></NomeField>
-
+                    {children}
                 </DialogContent>
                 <DialogActions>
                     <KernelSaveButton onClick={handleSave} color="primary" />
