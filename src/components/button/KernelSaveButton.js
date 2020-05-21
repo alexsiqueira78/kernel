@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { useStyles } from './styles';
+import { layoutStyles } from '../styles';
 
 const KernelSaveButton = (props) => {
 
-  const classes = useStyles();
+  const classes = layoutStyles();
 
   return (
       <Button onClick={props.onClick}>

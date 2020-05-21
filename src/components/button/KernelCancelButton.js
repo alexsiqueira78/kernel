@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import CancelIcon from  '@material-ui/icons/Cancel';
 
-import { useStyles } from './styles';
+import { layoutStyles } from '../styles';
 
 const KernelCancelButton = (props) => {
 
-    const classes = useStyles();
+    const classes = layoutStyles();
   
     return (
         <Button onClick={props.onClick}>

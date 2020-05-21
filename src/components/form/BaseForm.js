@@ -1,90 +1,70 @@
-import React, { useEffect, Fragment } from 'react';
+import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 import KernelSaveButton from './../button/KernelSaveButton';
 import KernelCancelButton from './../button/KernelCancelButton';
-import NomeField from './../field/NomeField';
+import { layoutStyles } from '../styles';
+
 
 const BaseForm = (props) => {
 
-    const [data, setData] = React.useState(
-        { dados: props.data }
+    const classes = layoutStyles();
+    const [fullWidth, setFullWidth] = React.useState(true);    
+    const [maxWidth, setMaxWidth] = React.useState('sm');
+    
+
+    const [data, setData] = React.useState([]
     );
 
     const handleSave = () => {
-        console.log("handleSave1->" + data)
         props.onSave(data);
     };
 
     const handleEntered = () => {
-        console.log(handleEntered);
         children.map(item => {
-           // handleChange([item.props.id], item.props.value);
             data[item.props.id] = item.props.value;
         })
     }
 
     const handleChange = (name, value) => {
-        console.log("handleChange1-> " + name + ":" + value)
         setData({ ...data, [name]: value });
-        console.log("handleChange1-> " + data)
     };
 
     const children = React.Children.map(props.children, function (child) {
         if (React.isValidElement(child)) {
             const propsAnother = {
-                onChange: handleChange
+                onChange: handleChange,
+                editing: props.editing
             }
             if (props.data[child.props.id]) {
                 propsAnother.value = props.data[child.props.id];
             }
-            //handleChange(data[child.props.id],propsAnother.value)
-            //data[child.props.id] = propsAnother.value;
             const element = React.cloneElement(child, { ...propsAnother })
             return element
         }
     });
 
-
-
-    // console.log(props.data);
-
-
-    /*    
-      const [values, setValues] = React.useState({
-        codigo: "",
-        cnpj: "",
-        razaosocial: "",
-      });
-    */
-    /*
-
-    */
-    /*   
-       const handleEntered = () => {
-        setValues({
-            codigo: props.data.codigo,
-            cnpj: props.data.cnpj,
-            razaosocial: props.data.razaosocial
-        });
-    }
-    */
-
-
-
+    const theme = useTheme();
+    
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <React.Fragment>
             <Dialog
                 open={props.open}
+                disableBackdropClick="true"
+                fullWidth={fullWidth}
+                maxWidth={maxWidth}
                 onClose={props.onClose}
                 onEntered={handleEntered}
                 aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
-                <DialogContent>
+                <DialogContent className={classes.baseForm} >
                     {children}
                 </DialogContent>
                 <DialogActions>

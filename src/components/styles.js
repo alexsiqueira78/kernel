@@ -4,6 +4,12 @@ export const layoutStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  baseForm: {
+    display: 'inline-grid',
+  },
+  inputError: {
+    borderColor: 'red',
+  },
   flex: {
     display: 'flex',
   },
@@ -45,4 +51,18 @@ export const layoutStyles = makeStyles(theme => ({
     position: 'relative',
     flexDirection: 'column',
   }, 
+
+  button: {
+    margin: theme.spacing(1),
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1),
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1),
+  },
+  iconSmall: {
+    fontSize: 20,
+  },
+    
 }));

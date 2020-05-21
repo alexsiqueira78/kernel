@@ -9,52 +9,65 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { tableIcons } from '../../assets/tableIcons';
 
-
 const KernelTable = (props) => {
 
     const [state, setState] = React.useState({
         open: false,
-        loading: false, 
+        loading: false,
         data: [],
         isvalid: false,
         errormessage: "",
-      });
-
-/*      
-    const loadData = () => {
-        props.doLoad()
-            .then(data => setState({ ...state, "loading": false, "data": data}))
-            .catch((error) => setState({ ...state, "isvalid": false, "errormessage": error }))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }
-
-    useEffect(() => loadData(), []);
-*/
+    });
 
     const handleAsking = (event, rowData) => {
-        console.log("handleAsking");
         setState({ ...state, "open": true, "rowData": rowData });
     }
-    
+
     const handleClose = () => {
-        console.log("handleClose");
         setState({ ...state, "open": false });
     }
-    
+
     const handleConfirm = () => {
-        console.log("handleConfirm");
         setState({ ...state, "open": false });
-        props.doDelete(state.rowData); 
+        props.doDelete(state.rowData);
     }
 
     return (
         <React.Fragment>
             <MaterialTable
+                localization={{
+                    pagination: {
+                        labelDisplayedRows: '{from}-{to} de {count}',
+                        labelRowsSelect: 'linhas',
+                        labelRowsPerPage: 'Linhas por página:',
+                        firstAriaLabel: 'Primeira Página',
+                        firstTooltip: 'Primeira Página',
+                        previousAriaLabel: 'Página Anterior',
+                        previousTooltip: 'Página Anterior',
+                        nextAriaLabel: 'Próxima Página',
+                        nextTooltip: 'Próxima Página',
+                        lastAriaLabel: 'Última Página',
+                        lastTooltip: 'Última Página',
+                    },
+                    toolbar: {
+                        nRowsSelected: '{0} linha(s) selecionada',
+                        searchTooltip: 'Pesquisar',
+                        searchPlaceholder: 'Pesquisar',
+                    },
+                    header: {
+                        actions: 'Ações'
+                    },
+                    body: {
+                        emptyDataSourceMessage: 'Não há registros a serem exibidos',
+                        filterRow: {
+                            filterTooltip: 'Filtrar'
+                        }
+                    }
+                }}
                 icons={tableIcons}
                 title={props.title}
                 columns={props.columns}
-//                data={state.data} 
-                data={props.data} 
+                data={props.data}
                 actions={[
                     {
                         icon: tableIcons.Add,

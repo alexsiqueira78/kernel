@@ -12,7 +12,7 @@ const LoginField = (props) => {
     const defaultErrorMessage = "Login Inválido!";
 
     return (
-        <BaseField  {...props} defaultErrorMessage={defaultErrorMessage} validate={validate}/>
+        <BaseField  {...props} readOnly={props.editing} defaultErrorMessage={defaultErrorMessage} validate={validate}/>
     )
 
 }

@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Drawer from '@material-ui/core/Drawer';
-import Typography from '@material-ui/core/Typography';
 
 
 import KernelNavigationGroup from './KernelNavigationGroup';
@@ -140,7 +139,7 @@ function KernelNavigation(props) {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                {props.children}
+                {React.cloneElement(props.children, { menu: menu })}
             </main>
         </React.Fragment>
     )

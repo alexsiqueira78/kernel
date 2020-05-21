@@ -11,6 +11,7 @@ export const load = async () => {
         });
 };
 
+
 export const save = async (usuario) => {
     const requestConfig = {
         method: "post",
@@ -27,17 +28,17 @@ export const save = async (usuario) => {
     }
     return await api(requestConfig)
         .then((response) => {
+            console.log("teste....")
             return response.data
         })
         .catch((error) => {
             return error;
         });
+     
 }
 
+
 export const remove = async (id) => {
-
-
-
     return await api.delete(`/usuario/remover/${id}`)
         .then((response) => {
             return response.data

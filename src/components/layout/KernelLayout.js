@@ -1,12 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
 
-import { layoutStyles } from './styles';
-import KernelToolBar from './../bar/KernelToolBar';
+import { layoutStyles } from '../styles';
 import KernelNavigation from './../navigation/KernelNavigation';
 import KernelMain from '../main/KernelMain';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 
@@ -77,7 +73,7 @@ const KernelLayout = () => {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <CssBaseline />
+
         <KernelNavigation navigation={menu}>
           <KernelMain/>
         </KernelNavigation>
